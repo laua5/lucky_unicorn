@@ -1,5 +1,6 @@
-"""Component 4  - game mechanics and looping v1
-Based on 05_token_generator but hard-wired to only allocate donkeys
+"""Component 4  - game mechanics and looping v2
+Based on 06_rounds_v1
+removed hard-wiring so that all tokens can be allocated (randint 1-100)
 Gives user feedback about number of rounds and maintains balance.
 Test amount set to $5
 """
@@ -15,8 +16,8 @@ play_again = ""
 
 # Testing loop to generate 5 tokens
 while play_again != "x":
-    rounds_played += 1 # Keep track of rounds
-    number = random.randint(6, 36) # Can only be a donkey
+    rounds_played += 1  # Keep track of rounds
+    number = random.randint(1, 100)
 
     # Adjust balance
     # If the random number is between 1 and 5
@@ -27,7 +28,7 @@ while play_again != "x":
 
     # If the random number is between 6 and 36
     # User gets a donkey (subtract $1 from balance)
-    elif 6<= number <= 36:
+    elif 6 <= number <= 36:
         token = "donkey"
         balance -= 1
 
@@ -45,12 +46,16 @@ while play_again != "x":
             balance -= 0.5
 
     # output
-    print(f"Token: {token}, Balance: {balance:.2f}")
+    print(f"Round {rounds_played} Token: {token}, Balance: {balance:.2f}")
+    if balance < 1:
+        print("\nSorry but you have run out of money")
+        play_again = "x"
+    else:
+        play_again = input("\n Do you want to play another round?\n<enter> to "
+                           "play again or 'X' to exit ").lower()
+        print()
 
-
-
-
-
-
-
-
+print("Thanks for playing")
+print(f"You started with ${TEST_AMOUNT:.2f}")
+print(f" and leave with ${balance:.2f}")
+print("Goodbye")
