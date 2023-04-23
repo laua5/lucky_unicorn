@@ -1,4 +1,4 @@
-"""LU base component - based on 00_LU_base_v2
+"""LU base component - final version
 Adding instructions to instructions function and further text decoration"""
 
 import random
